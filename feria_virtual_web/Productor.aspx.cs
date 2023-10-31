@@ -1,4 +1,4 @@
-﻿using Oracle.DataAccess.Client;
+﻿using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +23,7 @@ namespace feria_virtual_web
 
         private void BindGrid()
         {
-            string connectionString = "DATA SOURCE = XE; PASSWORD = 123; USER ID = maipogrande"; 
+            string connectionString = "Data Source=localhost:1521/xe;User Id=maipogrande;Password=123;"; 
             using (OracleConnection con = new OracleConnection(connectionString))
             {
                 OracleCommand cmd = new OracleCommand("SELECT * FROM PRODUCTOS", con); 
@@ -39,7 +39,7 @@ namespace feria_virtual_web
 
         protected void eliminar_producto_Click(object sender, EventArgs e)
         {
-            using (OracleConnection conexion = new OracleConnection("DATA SOURCE = XE ; PASSWORD = 123 ; USER ID= maipogrande"))
+            using (OracleConnection conexion = new OracleConnection("Data Source=localhost:1521/xe;User Id=maipogrande;Password=123;"))
             {
                 OracleCommand comando = new OracleCommand("DELETE PRODUCTOS WHERE RUT = :id_producto", conexion);
                 comando.Parameters.Add(":id_producto", ID_producto.Text);
@@ -53,7 +53,7 @@ namespace feria_virtual_web
 
         protected void modificar_producto_Click(object sender, EventArgs e)
         {
-            using (OracleConnection conexion = new OracleConnection("DATA SOURCE = XE ; PASSWORD = 123 ; USER ID= maipogrande"))
+            using (OracleConnection conexion = new OracleConnection("Data Source=localhost:1521/xe;User Id=maipogrande;Password=123;"))
             {
 
                 OracleCommand comando = new OracleCommand("UPDATE PRODUCTO SET RUT = :id_producto, NOMBRE = :id_categoria,NOMBRE_PRODUCTO = :nombre_producto, PRECIO = :precio, CANTIDAD = :id_calidad WHERE RUT = :id_producto", conexion);
@@ -72,7 +72,7 @@ namespace feria_virtual_web
 
         protected void agregar_produto_Click1(object sender, EventArgs e)
         {
-            using (OracleConnection conexion = new OracleConnection("DATA SOURCE = XE ; PASSWORD = 123 ; USER ID= maipogrande"))
+            using (OracleConnection conexion = new OracleConnection("Data Source=localhost:1521/xe;User Id=maipogrande;Password=123;"))
             {
 
                 OracleCommand comando = new OracleCommand("INSERT INTO PRODUCTOS (RUT,NOMBRE,NOMBRE_PRODUCTO,PRECIO,CANTIDAD) VALUES (:id_producto,:id_categoria,:nombre_producto,:precio,:id_calidad)", conexion);

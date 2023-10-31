@@ -5,7 +5,7 @@ using System.Runtime.Remoting.Messaging;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Oracle.DataAccess.Client;
+using Oracle.ManagedDataAccess.Client;
 namespace feria_virtual_web
 {
     public partial class _Default : Page
@@ -14,7 +14,7 @@ namespace feria_virtual_web
         {
 
         }
-        OracleConnection conexion = new OracleConnection("DATA SOURCE = XE ; PASSWORD = 123 ; USER ID= maipogrande");
+        OracleConnection conexion = new OracleConnection("Data Source=localhost:1521/xe;User Id=maipogrande;Password=123;");
         protected void btnlogin_Click(object sender, EventArgs e)
         {
             conexion.Open();
