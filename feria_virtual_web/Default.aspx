@@ -4,12 +4,16 @@
     <head>
         <title>Iniciar sesión</title>
         <style>
+        body{
+        font-family: 'DM-Sans', sans-serif;
+        }
+        
             .login {
                 min-height: 100vh;
             }
 
             .bg-image {
-                background-image: url('https://i.postimg.cc/mgsX5s9X/tmptkgl-gm9.png');
+                background-image: url('https://i.postimg.cc/0QSMKLNm/man-7952750-1920.jpg');
                 background-size: cover;
                 background-position: center;
             }
