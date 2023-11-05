@@ -39,7 +39,15 @@
             </div>
             <div class="col-md-6">
                 <div class="gridview-container">
-                    <asp:GridView ID="mostrar" runat="server" CssClass="table table-striped table-responsive" AutoGenerateColumns="true" OnSelectedIndexChanged="mostrar_SelectedIndexChanged">
+                    <asp:GridView ID="mostrar" runat="server" CssClass="table table-striped table-responsive" AutoGenerateColumns="false" OnSelectedIndexChanged="mostrar_SelectedIndexChanged">
+                        <Columns>
+                            <asp:BoundField DataField="ID_PRODUCTO" HeaderText="N° Producto" />
+                            <asp:BoundField DataField="ID_CATEGORIA" HeaderText="Categoría" />
+                            <asp:BoundField DataField="NOMBRE_PRODUCTO" HeaderText="Nombre" />
+                            <asp:BoundField DataField="PRECIO" HeaderText="Precio" />
+                            <asp:BoundField DataField="ID_CALIDAD" HeaderText="Calidad"/>
+                            <asp:BoundField DataField="PORCENTAJE_MERMA" HeaderText="Porcentaje de merma"/>
+                        </Columns>
                     </asp:GridView>
                 </div>
             </div>
