@@ -8,7 +8,7 @@
     <title></title>
 </head>
 <body>
-    <h1>transportista</h1>
+    <h1>Envíos pendientes</h1>
     <form id="form1" runat="server">
         <div>
         </div>

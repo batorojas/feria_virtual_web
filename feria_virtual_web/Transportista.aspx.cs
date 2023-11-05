@@ -3,9 +3,12 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Telegram.Bot;
+using System.Net.Http;
 
 namespace feria_virtual_web
 {
@@ -22,7 +25,7 @@ namespace feria_virtual_web
 
             using (OracleConnection con = new OracleConnection(connectionString))
             {
-                OracleCommand cmd = new OracleCommand("SELECT * FROM cabecera_subasta", con);
+                OracleCommand cmd = new OracleCommand("SELECT * FROM cabecera_subasta WHERE FECHA_DESPACHO_REALIZADO IS NULL", con);
                 con.Open();
                 OracleDataAdapter sda = new OracleDataAdapter(cmd);
                 DataTable dt = new DataTable();
@@ -44,7 +47,7 @@ namespace feria_virtual_web
             }
         }
 
-        private void ActualizarFechaDespachoRealizado(string idCabeceraSubasta)
+        private async Task ActualizarFechaDespachoRealizado(string idCabeceraSubasta)
         {
             string connectionString = "Data Source=localhost:1521/xe;User Id=maipogrande;Password=123;";
             using (OracleConnection con = new OracleConnection(connectionString))
@@ -54,8 +57,25 @@ namespace feria_virtual_web
                 {
                     cmd.Parameters.Add(":idCabeceraSubasta", OracleDbType.Varchar2).Value = idCabeceraSubasta;
                     con.Open();
-                    cmd.ExecuteNonQuery();
+                    cmd.ExecuteNonQuery(); 
+                    await EnviarMensajeTelegram();
                 }
+            }
+        }
+        private async Task EnviarMensajeTelegram()
+        {
+            try
+            {
+                string botToken = "6762818327:AAHOiQlDwmDucqKgRacNDUBY7VRlHVNkYkA"; // Reemplaza con el token de tu bot
+                long chatId = 902743181; // Reemplaza con el ID del chat al que deseas enviar el mensaje
+                var botClient = new TelegramBotClient(botToken);
+                string mensaje = "El transportista ha llegado con su pedido, asegúrese de revisar el pedido antes de realizar el pago.";
+                await botClient.SendTextMessageAsync(chatId, mensaje);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Ocurrió una excepción al enviar el mensaje de Telegram: {ex.Message}");
+                // Puedes manejar el error de envío de mensaje de Telegram aquí
             }
         }
     }
