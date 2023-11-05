@@ -13,7 +13,7 @@
             }
 
             .bg-image {
-                background-image: url('https://i.postimg.cc/0QSMKLNm/man-7952750-1920.jpg');
+                background-image: url('images/img2.jpg');
                 background-size: cover;
                 background-position: center;
             }
@@ -37,7 +37,7 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-md-9 col-lg-8 mx-auto">
-                                <h3 class="login-heading mb-4">Bienvenid@ a Maipo Grande</h3>
+                                <h3 class="login-heading mb-4">Bienvenido</h3>
                                 <asp:TextBox
                                     CssClass="form-control mb-3"
                                     TextMode="SingleLine"

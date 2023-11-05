@@ -22,7 +22,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <h2>Bienvenidos a Maipo Grande</h2>
-                <p>En el corazón de la excelencia en la producción y distribución de frutas en la zona metropolitana sur del país, Maipo Grande representa una red sólida con más de 50 años de experiencia en la industria.</p>
+                <p>En el corazón de la excelencia en la producción y distribución de frutas en la zona metropolitana sur del país, Maipo Grande representa una red sólida con más de 50 años de experiencia en la industria ayudándote a llevar lo mejor de la tierra a tu mesa.</p>
             </div>
         </div>
 
