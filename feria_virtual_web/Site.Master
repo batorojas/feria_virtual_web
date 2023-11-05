@@ -52,7 +52,7 @@
                             <a class="nav-link" runat="server" href="~/">Inicio</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" runat="server" href="~/About">Acerca de</a>
+                            <a class="nav-link" runat="server" href="~/About">Quiénes somos</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" runat="server" href="~/Contact">Contacto</a>
