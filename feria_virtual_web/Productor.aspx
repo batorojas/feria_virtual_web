@@ -10,7 +10,7 @@
 </head>
 <body>
     <form id="form1" runat="server" class="container">
-        <h1>Agregar producto</h1>
+        <h1>Lista de productos</h1>
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
@@ -41,14 +41,15 @@
                 <div class="gridview-container">
                     <asp:GridView ID="mostrar" runat="server" CssClass="table table-striped table-responsive" AutoGenerateColumns="false" OnSelectedIndexChanged="mostrar_SelectedIndexChanged">
                         <Columns>
-                            <asp:BoundField DataField="ID_PRODUCTO" HeaderText="N° Producto" />
-                            <asp:BoundField DataField="ID_CATEGORIA" HeaderText="Categoría" />
-                            <asp:BoundField DataField="NOMBRE_PRODUCTO" HeaderText="Nombre" />
-                            <asp:BoundField DataField="PRECIO" HeaderText="Precio" />
-                            <asp:BoundField DataField="ID_CALIDAD" HeaderText="Calidad"/>
-                            <asp:BoundField DataField="PORCENTAJE_MERMA" HeaderText="Porcentaje de merma"/>
+                            <asp:BoundField DataField="ID_PRODUCTO" HeaderText="ID PRODUCTO" />
+                            <asp:BoundField DataField="NOMBRE_PRODUCTO" HeaderText="NOMBRE PRODUCTO" />
+                            <asp:BoundField DataField="PRECIO" HeaderText="PRECIO" />
+                            <asp:BoundField DataField="ID_CALIDAD" HeaderText="CALIDAD" />
+                            <asp:BoundField DataField="PORCENTAJE_MERMA" HeaderText="PORCENTAJE MERMA"/>
+                            <asp:ButtonField ButtonType="Button" Text="Eliminar" CommandName="Delete" HeaderText="Acción" />
                         </Columns>
                     </asp:GridView>
+
                 </div>
             </div>
         </div>
