@@ -61,7 +61,7 @@
     			        			<span class="fa fa-globe"></span>
     			        		</div>
     			        		<div class="text">
-    				            <p><span>Website</span> <a href="#">www.maipogrande.cl</a></p>
+    				            <p><span>Sitio:</span> <a href="#">www.maipogrande.cl</a></p>
     				          </div>
     			          </div>
     							</div>
