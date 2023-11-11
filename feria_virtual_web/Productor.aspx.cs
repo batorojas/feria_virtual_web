@@ -36,21 +36,48 @@ namespace feria_virtual_web
             }
         }
         
+        protected void mostrar_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName == "Eliminar")
+            {
+                int rowIndex = Convert.ToInt32(e.CommandArgument);
+
+                // Obtén el valor del ID_PRODUCTO en la fila seleccionada
+                string idProducto = mostrar.DataKeys[rowIndex]["ID_PRODUCTO"].ToString();
+
+                // Llama al método de eliminación utilizando el ID_PRODUCTO
+                EliminarProducto(idProducto);
+
+                // Actualiza el GridView después de la eliminación si es necesario
+                // Puedes volver a cargar los datos desde la base de datos o simplemente eliminar la fila del GridView
+                mostrar.DataBind();
+            }
+        }
 
 
-        // protected void eliminar_producto_Click(object sender, EventArgs e)
-        // {
-        //     using (OracleConnection conexion = new OracleConnection("Data Source=localhost:1521/xe;User Id=maipogrande;Password=123;"))
-        //     {
-        //         OracleCommand comando = new OracleCommand("DELETE PRODUCTO WHERE RUT = :id_producto", conexion);
-        //         comando.Parameters.Add(":id_producto", ID_producto.Text);
-        //         conexion.Open();
-        //         comando.ExecuteNonQuery();
-        //         conexion.Close();
-        //     }
-        //     BindGrid();
-        //
-        // }
+        private void EliminarProducto(string idProducto)
+        {
+            using (OracleConnection conexion = new OracleConnection("Data Source=localhost:1521/xe;User Id=maipogrande;Password=123;"))
+            {
+                using (OracleCommand comando = new OracleCommand("DELETE FROM PRODUCTO WHERE ID_PRODUCTO = :ID_PRODUCTO", conexion))
+                {
+                    comando.Parameters.Add(":ID_PRODUCTO", OracleDbType.Int32).Value = Convert.ToInt32(idProducto);
+
+                    try
+                    {
+                        conexion.Open();
+                        comando.ExecuteNonQuery();
+                        // Puedes agregar código adicional después de ejecutar la consulta
+                    }
+                    catch (Exception ex)
+                    {
+                        // Manejar la excepción, puedes mostrar un mensaje o realizar alguna acción específica.
+                        // Por ejemplo, puedes agregar un control de errores o registrar la excepción en algún registro.
+                    }
+                } // La cláusula using se encargará de cerrar el comando automáticamente
+            } // La cláusula using se encargará de cerrar la conexión automáticamente
+        }
+
 
         // protected void modificar_producto_Click(object sender, EventArgs e)
         // {

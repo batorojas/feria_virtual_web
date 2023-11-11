@@ -39,22 +39,21 @@
             </div>
             <div class="col-md-6">
                 <div class="gridview-container">
-                   <asp:GridView ID="mostrar" runat="server" CssClass="table table-striped table-bordered table-sm table-hover table-responsive" AutoGenerateColumns="false">
-                       <Columns>
-                           <asp:BoundField DataField="ID_PRODUCTO" HeaderText="#" />
-                           <asp:BoundField DataField="NOMBRE_PRODUCTO" HeaderText="Nombre" />
-                           <asp:BoundField DataField="PRECIO" HeaderText="Precio" />
-                           <asp:BoundField DataField="ID_CALIDAD" HeaderText="Calidad" />
-                           <asp:BoundField DataField="PORCENTAJE_MERMA" HeaderText="Porcentaje de merma" />
-                           <asp:TemplateField HeaderText="Acción">
-                               <ItemTemplate>
-                                   <asp:LinkButton CommandName="Modificar" CommandArgument='<%# Container.DataItemIndex %>' Text="Modificar" runat="server" CssClass="btn btn-warning btn-sm btn-block action-button" />
-                                   <asp:LinkButton CommandName="Eliminar" CommandArgument='<%# Container.DataItemIndex %>' Text="Eliminar" runat="server" CssClass="btn btn-danger btn-sm btn-block action-button" />
-                               </ItemTemplate>
-                           </asp:TemplateField>
-                       </Columns>
-                   </asp:GridView>
-
+                   <asp:GridView ID="mostrar" runat="server" CssClass="table table-striped table-bordered table-sm table-hover table-responsive" AutoGenerateColumns="false"  OnRowCommand="mostrar_RowCommand" DataKeyNames="ID_PRODUCTO">
+                                          <Columns>
+                                              <asp:BoundField DataField="ID_PRODUCTO" HeaderText="#" />
+                                              <asp:BoundField DataField="NOMBRE_PRODUCTO" HeaderText="Nombre" />
+                                              <asp:BoundField DataField="PRECIO" HeaderText="Precio" />
+                                              <asp:BoundField DataField="ID_CALIDAD" HeaderText="Calidad" />
+                                              <asp:BoundField DataField="PORCENTAJE_MERMA" HeaderText="Porcentaje de merma" />
+                                              <asp:TemplateField HeaderText="Acción">
+                                                  <ItemTemplate>
+                                                      <asp:LinkButton CommandName="Modificar" CommandArgument='<%# Container.DataItemIndex %>' Text="Modificar" runat="server" CssClass="btn btn-warning btn-sm btn-block action-button" />
+                                                      <asp:LinkButton CommandName="Eliminar" CommandArgument='<%# Container.DataItemIndex %>' Text="Eliminar" runat="server" CssClass="btn btn-danger btn-sm btn-block action-button" />
+                                                  </ItemTemplate>
+                                              </asp:TemplateField>
+                                          </Columns>
+                                      </asp:GridView>
                 </div>
             </div>
         </div>
