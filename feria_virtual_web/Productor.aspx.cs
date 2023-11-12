@@ -51,6 +51,8 @@ namespace feria_virtual_web
                 // Actualiza el GridView después de la eliminación si es necesario
                 // Puedes volver a cargar los datos desde la base de datos o simplemente eliminar la fila del GridView
                 mostrar.DataBind();
+                string script = "alert('El producto se ha eliminado exitosamente');";
+                ClientScript.RegisterStartupScript(this.GetType(), "EliminacionExitosa", script, true); 
             }
         }
 
@@ -76,6 +78,7 @@ namespace feria_virtual_web
                     }
                 } // La cláusula using se encargará de cerrar el comando automáticamente
             } // La cláusula using se encargará de cerrar la conexión automáticamente
+            BindGrid();
         }
 
 
