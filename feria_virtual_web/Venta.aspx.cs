@@ -115,12 +115,6 @@ namespace feria_virtual_web
             }
         }
 
-        protected void dgDetallesPV_ItemCommand(object source, System.Web.UI.WebControls.DataGridCommandEventArgs e)
-        {
-            
-        }
-
-
         protected void dgDetallesPV_SelectedIndexChanged(object sender, EventArgs e)
         {
             BindGrid();
@@ -165,7 +159,38 @@ namespace feria_virtual_web
             }
         }
 
+        protected void dgDetallesPV_ItemCommand(object source, DataGridCommandEventArgs e)
+        {
+            if (e.CommandName == "PagarDetalle")
+            {
+                // Mensaje de depuración
+                System.Diagnostics.Debug.WriteLine("Botón Pagar presionado en la fila " + e.Item.ItemIndex);
 
+                // URL de la página externa a la que deseas redireccionar
+                string urlExterna = "https://www.sandbox.paypal.com/checkoutnow?token=537040496W707163N";
+
+                // Redireccionar a la página externa
+                Response.Redirect(urlExterna);
+            }
+        }
+
+        // Método ficticio para obtener el token desde la base de datos
+        private string ObtenerTokenDesdeLaBaseDeDatos(string idProducto)
+        {
+            // Aquí implementa la lógica para obtener el token asociado al producto desde tu base de datos
+            // Puedes consultar la base de datos y devolver el token correspondiente
+            // En este ejemplo, simplemente devolveré un token de ejemplo
+            return "537040496W707163N";
+        }
+
+        protected void btnPaypal_Click(object sender, EventArgs e)
+        {
+            // URL a la que deseas redireccionar
+            string urlExterna = "https://www.sandbox.paypal.com/checkoutnow?token=34C92048HK7174418";
+
+            // Redireccionar a la página externa
+            Response.Redirect(urlExterna);
+        }
     }
 
     }
