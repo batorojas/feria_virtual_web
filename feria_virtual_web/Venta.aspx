@@ -66,6 +66,12 @@
                     </div>
                 <div>
                  <asp:Button runat="server" ID="btnAgregarPedido" Text="Agregar Pedido" OnClick="btnAgregarPedido_Click" />
+                    <h1></h1>
+                 <div>
+                <label for="paypal">prueba de paipal</label>
+                <asp:Button runat="server" ID="Button1" Text="prueba de paypal" OnClick="btnPaypal_Click" />
+               </div>
+
                     </div>
             </div>
             
