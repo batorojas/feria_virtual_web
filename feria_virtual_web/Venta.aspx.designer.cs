@@ -11,7 +11,7 @@ namespace feria_virtual_web
 {
 
 
-    public partial class Productor
+    public partial class Venta
     {
 
         /// <summary>
@@ -24,111 +24,120 @@ namespace feria_virtual_web
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
-        /// Control Label1.
+        /// Control txtObservacion.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label1;
+        protected global::System.Web.UI.WebControls.TextBox txtObservacion;
 
         /// <summary>
-        /// Control ID_CATEGORIA.
+        /// Control txtRutCliente.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox ID_CATEGORIA;
+        protected global::System.Web.UI.WebControls.TextBox txtRutCliente;
 
         /// <summary>
-        /// Control Label2.
+        /// Control btnGenerarSolicitud.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label2;
+        protected global::System.Web.UI.WebControls.Button btnGenerarSolicitud;
 
         /// <summary>
-        /// Control NOMBRE_PRODUCTO.
+        /// Control dgDetallesPV.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox NOMBRE_PRODUCTO;
+        protected global::System.Web.UI.WebControls.DataGrid dgDetallesPV;
 
         /// <summary>
-        /// Control Label3.
+        /// Control lblIDProducto.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label3;
+        protected global::System.Web.UI.WebControls.Label lblIDProducto;
 
         /// <summary>
-        /// Control PRECIO.
+        /// Control txtCantidad.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox PRECIO;
+        protected global::System.Web.UI.WebControls.TextBox txtCantidad;
 
         /// <summary>
-        /// Control Label4.
+        /// Control lblPrecioUnitario.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label4;
+        protected global::System.Web.UI.WebControls.Label lblPrecioUnitario;
 
         /// <summary>
-        /// Control ID_CALIDAD.
+        /// Control ID_PRODUCTO.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox ID_CALIDAD;
+        protected global::System.Web.UI.WebControls.TextBox ID_PRODUCTO;
 
         /// <summary>
-        /// Control Label5.
+        /// Control lblIDCabeceraPV.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label5;
+        protected global::System.Web.UI.WebControls.Label lblIDCabeceraPV;
 
         /// <summary>
-        /// Control PORCENTAJE_MERMA.
+        /// Control CANTIDAD.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox PORCENTAJE_MERMA;
+        protected global::System.Web.UI.WebControls.TextBox CANTIDAD;
 
         /// <summary>
-        /// Control agregar_producto.
+        /// Control PrecioUnit.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button agregar_producto;
+        protected global::System.Web.UI.WebControls.Label PrecioUnit;
 
         /// <summary>
-        /// Control mostrar.
+        /// Control PrecioUnitario.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView mostrar;
+        protected global::System.Web.UI.WebControls.TextBox PrecioUnitario;
+
+        /// <summary>
+        /// Control btnAgregarPedido.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAgregarPedido;
     }
 }
