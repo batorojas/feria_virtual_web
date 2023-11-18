@@ -126,14 +126,14 @@ namespace feria_virtual_web
             try
             {
                 // Obtener valores de TextBox y Label fuera del DataGrid
-                string cantidad = txtCantidad.Text;
-                string idProducto = lblIDProducto.Text;
-                string precioUnitario = lblPrecioUnitario.Text;
-                string idCabeceraPV = lblIDCabeceraPV.Text;
+                string idProducto = id_producto.Text;
+                string cantidad = cantidadde.Text;
 
                 // Insertar en la base de datos (código de inserción depende de tu estructura de tablas)
-                string insertQuery = "INSERT INTO DETALLE_PV (ID_DETALLE_PV,ID_PRODUCTO, CANTIDAD, PRECIO_UNITARIO, ID_CABECERA_PV) " +
-                                     "VALUES (DETALLE_PV_SEQ.NEXTVAL,:IdProducto, :Cantidad, :PrecioUnitario, :IdCabeceraPV)";
+                string insertQuery = "INSERT INTO DETALLE_PV (ID_DETALLE_PV, ID_PRODUCTO, CANTIDAD, PRECIO_UNITARIO, ID_CABECERA_PV) " +
+                                     $"VALUES (DETALLE_PV_SEQ.NEXTVAL, :IdProducto, :Cantidad, " +
+                                     $"(SELECT p.precio FROM producto p WHERE p.id_producto = :IdProducto), " +
+                                     "(SELECT MAX(id_cabecera_pv) FROM CABECERA_PV))";
 
                 using (OracleConnection con = new OracleConnection("Data Source=localhost:1521/xe;User Id=maipogrande;Password=123;"))
                 {
@@ -143,8 +143,6 @@ namespace feria_virtual_web
                     {
                         cmd.Parameters.Add(new OracleParameter("IdProducto", idProducto));
                         cmd.Parameters.Add(new OracleParameter("Cantidad", cantidad));
-                        cmd.Parameters.Add(new OracleParameter("PrecioUnitario", precioUnitario));
-                        cmd.Parameters.Add(new OracleParameter("IdCabeceraPV", idCabeceraPV));
 
                         // Ejecutar la consulta INSERT
                         cmd.ExecuteNonQuery();
@@ -159,7 +157,6 @@ namespace feria_virtual_web
                 Response.Write("Error al agregar el pedido: " + ex.Message);
             }
         }
-
         protected void dgDetallesPV_ItemCommand(object source, DataGridCommandEventArgs e)
         {
             if (e.CommandName == "PagarDetalle")
