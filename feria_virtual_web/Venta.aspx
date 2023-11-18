@@ -47,23 +47,14 @@
             <h1></h1>
             <div>   
                 <div>
-                <asp:Label runat="server" ID="lblIDProducto" Text="ID_PRODUCTO" Visible="true"></asp:Label>
-                    <asp:TextBox runat="server" ID="txtCantidad"></asp:TextBox>
+                <asp:Label runat="server" ID="lblIDProducto" Text="id_producto" Visible="true"></asp:Label>
+                    <asp:TextBox runat="server" ID="id_producto"></asp:TextBox>
                   </div>
                 <div>
-                 <asp:Label runat="server" ID="lblPrecioUnitario" Text="CANTIDAD" Visible="true"></asp:Label>
-                <asp:TextBox runat="server" ID="ID_PRODUCTO"></asp:TextBox>
+                 <asp:Label runat="server" ID="lblPrecioUnitario" Text="cantidad" Visible="true"></asp:Label>
+                <asp:TextBox runat="server" ID="cantidadde"></asp:TextBox>
                    </div>
-                <div>
-
-                 <asp:Label runat="server" ID="lblIDCabeceraPV" Text="PRECIO_UNITARIO" Visible="true"></asp:Label>
-                <asp:TextBox runat="server" ID="CANTIDAD"></asp:TextBox>
-                  </div>
-                <div>
-                
-                 <asp:Label runat="server" ID="PrecioUnit" Visible="true" Text="ID_CABECERA_PV"></asp:Label>
-                <asp:TextBox runat="server" ID="PrecioUnitario"></asp:TextBox>
-                    </div>
+                 
                 <div>
                  <asp:Button runat="server" ID="btnAgregarPedido" Text="Agregar Pedido" OnClick="btnAgregarPedido_Click" />
                     <h1></h1>

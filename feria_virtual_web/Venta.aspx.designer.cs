@@ -69,13 +69,13 @@ namespace feria_virtual_web
         protected global::System.Web.UI.WebControls.Label lblIDProducto;
 
         /// <summary>
-        /// Control txtCantidad.
+        /// Control id_producto.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCantidad;
+        protected global::System.Web.UI.WebControls.TextBox id_producto;
 
         /// <summary>
         /// Control lblPrecioUnitario.
@@ -87,49 +87,13 @@ namespace feria_virtual_web
         protected global::System.Web.UI.WebControls.Label lblPrecioUnitario;
 
         /// <summary>
-        /// Control ID_PRODUCTO.
+        /// Control cantidadde.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox ID_PRODUCTO;
-
-        /// <summary>
-        /// Control lblIDCabeceraPV.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblIDCabeceraPV;
-
-        /// <summary>
-        /// Control CANTIDAD.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox CANTIDAD;
-
-        /// <summary>
-        /// Control PrecioUnit.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label PrecioUnit;
-
-        /// <summary>
-        /// Control PrecioUnitario.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox PrecioUnitario;
+        protected global::System.Web.UI.WebControls.TextBox cantidadde;
 
         /// <summary>
         /// Control btnAgregarPedido.
