@@ -16,7 +16,10 @@ namespace feria_virtual_web
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            BindGrid();
+            if (!IsPostBack)
+            {
+                BindGrid();
+            }
         }
 
         private void BindGrid()
@@ -25,7 +28,7 @@ namespace feria_virtual_web
 
             using (OracleConnection con = new OracleConnection(connectionString))
             {
-                OracleCommand cmd = new OracleCommand("SELECT * FROM cabecera_subasta WHERE FECHA_DESPACHO_REALIZADO IS NULL", con);
+                OracleCommand cmd = new OracleCommand("SELECT CS.ID_CABECERA_SUBASTA, CS.FECHA_LIMITE_ENTREGA, CS.FECHA_DESPACHO_REALIZADO, CO.NOMBRE_COMUNA, CS.ID_CABECERA_PV, PV.RUT_CLIENTE, ES.DESC_ESTADO FROM CABECERA_SUBASTA CS JOIN COMUNA CO ON CS.ID_COMUNA = CO.ID JOIN ESTADO_SUBASTA ES ON CS.ID_ESTADO_SUBASTA = ES.ID_ESTADO_SUBASTA JOIN CABECERA_PV PV ON CS.ID_CABECERA_PV = PV.ID_CABECERA_PV WHERE CS.FECHA_DESPACHO_REALIZADO IS NULL", con);
                 con.Open();
                 OracleDataAdapter sda = new OracleDataAdapter(cmd);
                 DataTable dt = new DataTable();
@@ -44,6 +47,8 @@ namespace feria_virtual_web
                 string idSubasta = row.Cells[0].Text;
                 ActualizarFechaDespachoRealizado(idSubasta);
                 BindGrid();
+                string script = "alert('El proceso de venta ha sido actualizado y se notificó al cliente de la entrega.');";
+                ClientScript.RegisterStartupScript(this.GetType(), "ActualizarFecha", script, true);
             }
         }
 
