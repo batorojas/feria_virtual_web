@@ -35,30 +35,31 @@ namespace feria_virtual_web
                     // Obtener el RUT del cliente ingresado en el campo txtRutCliente
                     string rutCliente = txtRutCliente.Text.Trim();
 
-                    // Consultar la base de datos
-                    string selectQuery = "SELECT cp.ID_CABECERA_PV, cp.FECHA_EMISION, cp.OBS_PV, cp.RUT_CLIENTE, cp.ESTADO_PV, cp.EMPRESA_TRANS, cp.ID_TIPO_VENTA " +
-                                         "FROM cabecera_pv cp " +
-                                         "JOIN cliente c ON cp.RUT_CLIENTE = c.RUT " +
-                                         "WHERE c.RUT = :RutCliente";
+                    // Obtener la observación del campo txtObservacion
+                    string observacion = txtObservacion.Text.Trim();
 
-                    using (OracleCommand cmd = new OracleCommand(selectQuery, con))
+                    // Consultar la base de datos
+                    string insertQuery = "INSERT INTO CABECERA_PV (\"ID_CABECERA_PV\", \"FECHA_EMISION\",\"OBS_PV\",\"RUT_CLIENTE\",\"ESTADO_PV\",\"EMPRESA_TRANS\", \"ID_TIPO_VENTA\") " +
+                                         "VALUES (CABECERA_PV_SEQ.NEXTVAL, SYSDATE, :Observacion, :RutCliente, 1, 1, 1)";
+
+                    using (OracleCommand cmd = new OracleCommand(insertQuery, con))
                     {
+                        cmd.Parameters.Add(new OracleParameter("Observacion", observacion));
                         cmd.Parameters.Add(new OracleParameter("RutCliente", rutCliente));
 
-                        using (OracleDataReader reader = cmd.ExecuteReader())
+                        // Ejecutar la inserción
+                        int rowsAffected = cmd.ExecuteNonQuery();
+
+                        if (rowsAffected > 0)
                         {
-                            // Iterar sobre los resultados y realizar las acciones necesarias
-                            while (reader.Read())
-                            {
-                                // Acceder a los valores de las columnas, por ejemplo:
-                                int idCabeceraPV = reader.GetInt32(reader.GetOrdinal("ID_CABECERA_PV"));
-                                // Puedes acceder a otras columnas de la misma manera
-                            }
+                            // Puedes mostrar un mensaje de éxito o realizar otras acciones si es necesario
+                            Response.Write("Solicitud generada exitosamente.");
+                        }
+                        else
+                        {
+                            Response.Write("Error al generar la solicitud.");
                         }
                     }
-
-                    // Puedes mostrar un mensaje de éxito o realizar otras acciones si es necesario
-                    Response.Write("Consulta realizada exitosamente.");
 
                     con.Close();
                 }
@@ -66,7 +67,7 @@ namespace feria_virtual_web
             catch (Exception ex)
             {
                 // Manejar errores aquí (mostrar un mensaje de error, registrar el error, etc.)
-                Response.Write("Error al realizar la consulta: " + ex.Message);
+                Response.Write("Error al generar la solicitud: " + ex.Message);
             }
         }
 
