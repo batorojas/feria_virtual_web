@@ -25,7 +25,7 @@
                                           <asp:BoundField DataField="ID_CABECERA_PV" HeaderText="N° de venta" ItemStyle-HorizontalAlign="Center" />
                                           <asp:BoundField DataField="RUT_CLIENTE" HeaderText="Rut de cliente" ItemStyle-HorizontalAlign="Center" />
                                           <asp:BoundField DataField="DESC_ESTADO" HeaderText="Estado" ItemStyle-HorizontalAlign="Center" />
-                    <asp:ButtonField ButtonType="Button" Text="Cambiar a Entregado" CommandName="ActualizarFechaEntrega" HeaderText="Actualizar Entrega"/>
+                    <asp:ButtonField ButtonType="Button" Text="Actualizar Entrega" CommandName="ActualizarFechaEntrega" HeaderText="Acción"/>
                 </Columns>
      <HeaderStyle CssClass="text-center" />
          <RowStyle CssClass="text-center" />
