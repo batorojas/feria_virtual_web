@@ -18,15 +18,17 @@ namespace feria_virtual_web
             if (!IsPostBack)
             {
                 BindGrid();
+                ListarCategoria();
+                ListarCalidad();
             }
         }
 
         private void BindGrid()
         {
-            string connectionString = "Data Source=localhost:1521/xe;User Id=maipogrande;Password=123;"; 
+            string connectionString = "Data Source=localhost:1521/xe;User Id=maipogrande;Password=123;";
             using (OracleConnection con = new OracleConnection(connectionString))
             {
-                OracleCommand cmd = new OracleCommand("SELECT * FROM PRODUCTO", con); 
+                OracleCommand cmd = new OracleCommand("SELECT P.ID_PRODUCTO, P.NOMBRE_PRODUCTO, P.PRECIO, C.DESCRIPCION, TO_CHAR(P.PORCENTAJE_MERMA * 100, '999') || '%' AS PORCENTAJE_MERMA FROM PRODUCTO P INNER JOIN CALIDAD C ON P.ID_CALIDAD = C.ID_CALIDAD", con);
                 con.Open();
                 OracleDataAdapter sda = new OracleDataAdapter(cmd);
                 DataTable dt = new DataTable();
@@ -35,7 +37,7 @@ namespace feria_virtual_web
                 mostrar.DataBind();
             }
         }
-        
+
         protected void mostrar_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             if (e.CommandName == "Eliminar")
@@ -101,15 +103,82 @@ namespace feria_virtual_web
         //
         // }
 
+        private void ListarCategoria()
+        {
+            string connectionString = "Data Source=localhost:1521/xe;User Id=maipogrande;Password=123;";
+            string query = "SELECT * FROM CATEGORIA";
+
+            using (OracleConnection connection = new OracleConnection(connectionString))
+            {
+                using (OracleCommand command = new OracleCommand(query, connection))
+                {
+                    connection.Open();
+
+                    using (OracleDataReader reader = command.ExecuteReader())
+                    {
+                        // Limpiar DropDownList antes de agregar nuevas categorías
+                        ddlCategoria.Items.Clear();
+
+                        // Agregar cada categoría al DropDownList
+                        while (reader.Read())
+                        {
+                            // Obtener el valor y texto de la columna NOMBRE_CATEGORIA
+                            string valorCategoria = reader["NOMBRE_CATEGORIA"].ToString();
+                    
+                            // Agregar el ListItem al DropDownList con el valor y texto
+                            ddlCategoria.Items.Add(new ListItem(valorCategoria, valorCategoria));
+                        }
+                    }
+                }
+            }
+        }
+        
+        private void ListarCalidad()
+        {
+            string connectionString = "Data Source=localhost:1521/xe;User Id=maipogrande;Password=123;";
+            string query = "SELECT * FROM CALIDAD";
+
+            using (OracleConnection connection = new OracleConnection(connectionString))
+            {
+                using (OracleCommand command = new OracleCommand(query, connection))
+                {
+                    connection.Open();
+
+                    using (OracleDataReader reader = command.ExecuteReader())
+                    {
+                        // Limpiar DropDownList antes de agregar nuevas categorías
+                        ddlCalidad.Items.Clear();
+
+                        // Agregar cada categoría al DropDownList
+                        while (reader.Read())
+                        {
+                            // Obtener el valor y texto de la columna NOMBRE_CATEGORIA
+                            string valorCalidad = reader["DESCRIPCION"].ToString();
+                    
+                            // Agregar el ListItem al DropDownList con el valor y texto
+                            ddlCalidad.Items.Add(new ListItem(valorCalidad, valorCalidad));
+                        }
+                    }
+                }
+            }
+        }
+        
+        
+    
+
+
         protected void agregar_producto_Click1(object sender, EventArgs e)
         {
             using (OracleConnection conexion = new OracleConnection("Data Source=localhost:1521/xe;User Id=maipogrande;Password=123;"))
             {
                 OracleCommand comando = new OracleCommand("INSERT INTO PRODUCTO (ID_PRODUCTO, ID_CATEGORIA, NOMBRE_PRODUCTO, PRECIO, ID_CALIDAD, PORCENTAJE_MERMA) VALUES (PRODUCTO_SEQ.NEXTVAL, :ID_CATEGORIA, :NOMBRE_PRODUCTO, :PRECIO, :ID_CALIDAD, :PORCENTAJE_MERMA)", conexion);
-                comando.Parameters.Add("ID_CATEGORIA", OracleDbType.Int32).Value = Convert.ToInt32(ID_CATEGORIA.Text);
+                int indiceSeleccionado = ddlCategoria.SelectedIndex;
+                int indiceSeleccionado2 = ddlCalidad.SelectedIndex;
+                // Asignar el índice seleccionado como ID_CATEGORIA
+                comando.Parameters.Add("ID_CATEGORIA", OracleDbType.Int32).Value = indiceSeleccionado + 1;
                 comando.Parameters.Add("NOMBRE_PRODUCTO", OracleDbType.Varchar2).Value = NOMBRE_PRODUCTO.Text;
                 comando.Parameters.Add("PRECIO", OracleDbType.Decimal).Value = Convert.ToDecimal(PRECIO.Text);
-                comando.Parameters.Add("ID_CALIDAD", OracleDbType.Int32).Value = Convert.ToInt32(ID_CALIDAD.Text);
+                comando.Parameters.Add("ID_CALIDAD", OracleDbType.Int32).Value = indiceSeleccionado2 + 1;
                 comando.Parameters.Add("PORCENTAJE_MERMA", OracleDbType.Decimal).Value = Convert.ToDecimal(PORCENTAJE_MERMA.Text);
                 conexion.Open();
                 comando.ExecuteNonQuery();

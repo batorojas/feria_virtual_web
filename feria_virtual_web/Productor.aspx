@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Productor.aspx.cs" Inherits="feria_virtual_web.Productor" %>
+﻿  <%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Productor.aspx.cs" Inherits="feria_virtual_web.Productor" %>
 
 <!DOCTYPE html>
 
@@ -16,7 +16,7 @@
             <div class="col-lg-6">
                 <div class="form-group">
                     <asp:Label ID="Label1" runat="server" Text="N° de categoría" CssClass="control-label"></asp:Label>
-                    <asp:TextBox ID="ID_CATEGORIA" runat="server" CssClass="form-control"></asp:TextBox>
+                    <asp:DropDownList ID="ddlCategoria" runat="server" CssClass="form-control"></asp:DropDownList>
                 </div>
                 <div class="form-group">
                     <asp:Label ID="Label2" runat="server" Text="Nombre de producto" CssClass="control-label"></asp:Label>
@@ -24,13 +24,14 @@
                 </div>
                 <div class="form-group">
                     <asp:Label ID="Label3" runat="server" Text="Precio" CssClass="control-label"></asp:Label>
+                    <div class="input-group mb-3">
+                      <span class="input-group-text">$</span>
                     <asp:TextBox ID="PRECIO" runat="server" CssClass="form-control"></asp:TextBox>
-                    <small id="precioHelp" class="form-text text-muted">No agregue el símbolo de $, sólo el valor del producto.</small>
+                        </div>
                 </div>
                 <div class="form-group">
                     <asp:Label ID="Label4" runat="server" Text="Calidad" CssClass="control-label"></asp:Label>
-                    <asp:TextBox ID="ID_CALIDAD" runat="server" CssClass="form-control"></asp:TextBox>
-                    <small id="idCalidadHelp" class="form-text text-muted">El rango debe ser entre 1 y 3, siendo 3 la mejor calidad.</small>
+                    <asp:DropDownList ID="ddlCalidad" runat="server" CssClass="form-control"></asp:DropDownList>
                 </div>
                 <div class="form-group">
                     <asp:Label ID="Label5" runat="server" Text="Porcentaje de merma" CssClass="control-label"></asp:Label>
@@ -48,7 +49,7 @@
                                               <asp:BoundField DataField="ID_PRODUCTO" HeaderText="#" />
                                               <asp:BoundField DataField="NOMBRE_PRODUCTO" HeaderText="Nombre" />
                                               <asp:BoundField DataField="PRECIO" HeaderText="Precio" />
-                                              <asp:BoundField DataField="ID_CALIDAD" HeaderText="Calidad" />
+                                              <asp:BoundField DataField="DESCRIPCION" HeaderText="Calidad" />
                                               <asp:BoundField DataField="PORCENTAJE_MERMA" HeaderText="Porcentaje de merma" />
                                               <asp:TemplateField HeaderText="Acción">
                                                   <ItemTemplate>
