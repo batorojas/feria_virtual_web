@@ -1,0 +1,35 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ListaPedidos.aspx.cs" Inherits="feria_virtual_web.ListaPedidos" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-4">Historial de Pedidos</h1>
+        <form id="form1" runat="server">
+            <div>
+            </div>
+            <div class="table-responsive">
+                <asp:GridView ID="GridViewListaPedidos" runat="server" AutoGenerateColumns="False" CssClass="table table-bordered table-hover">
+                    <Columns>
+                        <asp:BoundField DataField="ID_CABECERA_SUBASTA" HeaderText="#" ItemStyle-HorizontalAlign="Center" />
+                        <asp:BoundField DataField="FECHA_LIMITE_ENTREGA" HeaderText="Fecha límite" ItemStyle-HorizontalAlign="Center" />
+                        <asp:BoundField DataField="FECHA_DESPACHO_REALIZADO" HeaderText="Fecha entrega finalizada" ItemStyle-HorizontalAlign="Center" />
+                        <asp:BoundField DataField="NOMBRE_COMUNA" HeaderText="Comuna" ItemStyle-HorizontalAlign="Center" />
+                        <asp:BoundField DataField="ID_CABECERA_PV" HeaderText="N° de venta" ItemStyle-HorizontalAlign="Center" />
+                        <asp:BoundField DataField="RUT_CLIENTE" HeaderText="Rut de cliente" ItemStyle-HorizontalAlign="Center" />
+                        <asp:BoundField DataField="DESC_ESTADO" HeaderText="Estado" ItemStyle-HorizontalAlign="Center" />
+                    </Columns>
+                    <HeaderStyle CssClass="text-center" />
+                    <RowStyle CssClass="text-center" />
+                </asp:GridView>
+            </div>
+        </form>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-dZlgeVAPNl/w7th5MzUkkakH64OaaAOb4aqae8zi5A7EG5Qp4IKdB2X9ElcP9Rb" crossorigin="anonymous"></script>
+</body>
+</html>

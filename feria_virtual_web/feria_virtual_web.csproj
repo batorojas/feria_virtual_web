@@ -208,6 +208,7 @@
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="ListaPedidos.aspx" />
     <Content Include="Productor.aspx" />
     <Content Include="Content\bootstrap.rtl.min.css.map" />
     <Content Include="Content\bootstrap.rtl.css.map" />
@@ -307,6 +308,13 @@
     <Compile Include="DetallePV.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="ListaPedidos.aspx.cs">
+      <DependentUpon>ListaPedidos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ListaPedidos.aspx.designer.cs">
+      <DependentUpon>ListaPedidos.aspx</DependentUpon>
     </Compile>
     <Compile Include="Productor.aspx.cs">
       <DependentUpon>Productor.aspx</DependentUpon>
