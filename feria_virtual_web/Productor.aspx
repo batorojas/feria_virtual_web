@@ -24,13 +24,14 @@
                 </div>
                 <div class="form-group">
                     <asp:Label ID="Label3" runat="server" Text="Precio" CssClass="control-label"></asp:Label>
+                    <div class="input-group mb-3">
+                      <span class="input-group-text">$</span>
                     <asp:TextBox ID="PRECIO" runat="server" CssClass="form-control"></asp:TextBox>
-                    <small id="precioHelp" class="form-text text-muted">No agregue el símbolo de $, sólo el valor del producto.</small>
+                        </div>
                 </div>
                 <div class="form-group">
                     <asp:Label ID="Label4" runat="server" Text="Calidad" CssClass="control-label"></asp:Label>
                     <asp:DropDownList ID="ddlCalidad" runat="server" CssClass="form-control"></asp:DropDownList>
-                    <small id="idCalidadHelp" class="form-text text-muted">El rango debe ser entre 1 y 3, siendo 3 la mejor calidad.</small>
                 </div>
                 <div class="form-group">
                     <asp:Label ID="Label5" runat="server" Text="Porcentaje de merma" CssClass="control-label"></asp:Label>
