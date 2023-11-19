@@ -16,7 +16,7 @@
             <div class="col-lg-6">
                 <div class="form-group">
                     <asp:Label ID="Label1" runat="server" Text="N° de categoría" CssClass="control-label"></asp:Label>
-                    <asp:TextBox ID="ID_CATEGORIA" runat="server" CssClass="form-control"></asp:TextBox>
+                    <asp:DropDownList ID="ddlCategoria" runat="server" CssClass="form-control"></asp:DropDownList>
                 </div>
                 <div class="form-group">
                     <asp:Label ID="Label2" runat="server" Text="Nombre de producto" CssClass="control-label"></asp:Label>
@@ -29,7 +29,7 @@
                 </div>
                 <div class="form-group">
                     <asp:Label ID="Label4" runat="server" Text="Calidad" CssClass="control-label"></asp:Label>
-                    <asp:TextBox ID="ID_CALIDAD" runat="server" CssClass="form-control"></asp:TextBox>
+                    <asp:DropDownList ID="ddlCalidad" runat="server" CssClass="form-control"></asp:DropDownList>
                     <small id="idCalidadHelp" class="form-text text-muted">El rango debe ser entre 1 y 3, siendo 3 la mejor calidad.</small>
                 </div>
                 <div class="form-group">

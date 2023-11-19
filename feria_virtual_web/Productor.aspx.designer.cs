@@ -33,13 +33,13 @@ namespace feria_virtual_web
         protected global::System.Web.UI.WebControls.Label Label1;
 
         /// <summary>
-        /// ID_CATEGORIA control.
+        /// ddlCategoria control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox ID_CATEGORIA;
+        protected global::System.Web.UI.WebControls.DropDownList ddlCategoria;
 
         /// <summary>
         /// Label2 control.
@@ -87,13 +87,13 @@ namespace feria_virtual_web
         protected global::System.Web.UI.WebControls.Label Label4;
 
         /// <summary>
-        /// ID_CALIDAD control.
+        /// ddlCalidad control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox ID_CALIDAD;
+        protected global::System.Web.UI.WebControls.DropDownList ddlCalidad;
 
         /// <summary>
         /// Label5 control.
