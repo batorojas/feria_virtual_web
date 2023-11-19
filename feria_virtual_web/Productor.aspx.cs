@@ -23,10 +23,10 @@ namespace feria_virtual_web
 
         private void BindGrid()
         {
-            string connectionString = "Data Source=localhost:1521/xe;User Id=maipogrande;Password=123;"; 
+            string connectionString = "Data Source=localhost:1521/xe;User Id=maipogrande;Password=123;";
             using (OracleConnection con = new OracleConnection(connectionString))
             {
-                OracleCommand cmd = new OracleCommand("SELECT * FROM PRODUCTO", con); 
+                OracleCommand cmd = new OracleCommand("SELECT P.ID_PRODUCTO, P.NOMBRE_PRODUCTO, P.PRECIO, C.DESCRIPCION, P.PORCENTAJE_MERMA FROM PRODUCTO P INNER JOIN CALIDAD C ON P.ID_CALIDAD = C.ID_CALIDAD", con);
                 con.Open();
                 OracleDataAdapter sda = new OracleDataAdapter(cmd);
                 DataTable dt = new DataTable();
@@ -35,7 +35,7 @@ namespace feria_virtual_web
                 mostrar.DataBind();
             }
         }
-        
+
         protected void mostrar_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             if (e.CommandName == "Eliminar")

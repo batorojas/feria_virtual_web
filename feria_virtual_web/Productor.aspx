@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Productor.aspx.cs" Inherits="feria_virtual_web.Productor" %>
+﻿  <%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Productor.aspx.cs" Inherits="feria_virtual_web.Productor" %>
 
 <!DOCTYPE html>
 
@@ -48,7 +48,7 @@
                                               <asp:BoundField DataField="ID_PRODUCTO" HeaderText="#" />
                                               <asp:BoundField DataField="NOMBRE_PRODUCTO" HeaderText="Nombre" />
                                               <asp:BoundField DataField="PRECIO" HeaderText="Precio" />
-                                              <asp:BoundField DataField="ID_CALIDAD" HeaderText="Calidad" />
+                                              <asp:BoundField DataField="DESCRIPCION" HeaderText="Calidad" />
                                               <asp:BoundField DataField="PORCENTAJE_MERMA" HeaderText="Porcentaje de merma" />
                                               <asp:TemplateField HeaderText="Acción">
                                                   <ItemTemplate>
