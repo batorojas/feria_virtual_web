@@ -76,35 +76,40 @@ namespace feria_virtual_web
                     // Obtener el índice de la fila
                     int rowIndex = Convert.ToInt32(e.CommandArgument);
 
-                    // Obtener los datos de la fila
-                    string idDetallePV = gvDetallesPV.DataKeys[rowIndex]["ID_DETALLE_PV"].ToString();
-                    string idProducto = gvDetallesPV.DataKeys[rowIndex]["ID_PRODUCTO"].ToString();
-                    string cantidad = gvDetallesPV.DataKeys[rowIndex]["CANTIDAD"].ToString();
-                    string precioUnitario = gvDetallesPV.DataKeys[rowIndex]["PRECIO_UNITARIO"].ToString();
+                    // Verificar si rowIndex está dentro de los límites
+                    if (rowIndex >= 0 && rowIndex < gvDetallesPV.Rows.Count)
+                    {
+                        // Obtener los datos de la fila
+                        GridViewRow row = gvDetallesPV.Rows[rowIndex];
 
-                    // Realizar la multiplicación de cantidad por precio unitario
-                    decimal total = Convert.ToDecimal(cantidad) * Convert.ToDecimal(precioUnitario);
+                        // Obtener los valores de las celdas directamente del GridView
+                        string idDetallePV = row.Cells[0].Text; // Ajusta el índice según la posición de la columna en tu GridView
+                        string idProducto = row.Cells[1].Text;  // Ajusta el índice según la posición de la columna en tu GridView
+                        string cantidad = row.Cells[2].Text;     // Ajusta el índice según la posición de la columna en tu GridView
+                        string precioUnitario = row.Cells[3].Text; // Ajusta el índice según la posición de la columna en tu GridView
 
-                    // Obtener el token de acceso de PayPal
-                    string accessToken = await ObtenerTokenAccesoPayPal();
+                        // Realizar la multiplicación de cantidad por precio unitario
+                        decimal total = Convert.ToDecimal(cantidad) * Convert.ToDecimal(precioUnitario);
 
-                    // Construir la URL de PayPal con el token de acceso y el monto total
-                    string urlPayPal = $"https://www.sandbox.paypal.com/checkoutnow?token={accessToken}&amount={total}";
+                        // Obtener el token de acceso de PayPal
+                        string accessToken = await ObtenerTokenAccesoPayPal().ConfigureAwait(false);
 
-                    // Redirigir a la página de PayPal con el token de acceso
-                    Response.Redirect(urlPayPal);
+                        // Construir la URL de PayPal con el token de acceso y el monto total
+                        string urlPayPal = $"https://www.sandbox.paypal.com/checkoutnow?token={accessToken}&amount={total}";
+                        Response.Write($"URL de redirección: {urlPayPal}");
+                        Response.Redirect(urlPayPal);
+
+                        // Redirigir a la página de PayPal con el token de acceso
+                        Response.Redirect(urlPayPal);
+                    }
                 }
                 catch (Exception ex)
                 {
-                    // Manejar errores aquí (mostrar un mensaje de error, registrar el error, etc.)
+                    // Manejar otros errores aquí (mostrar un mensaje de error, registrar el error, etc.)
                     Response.Write("Error al procesar el pago: " + ex.Message);
                 }
             }
         }
-
-
-
-
 
         // Método para obtener el token de acceso de PayPal
         private async Task<string> ObtenerTokenAccesoPayPal()
@@ -120,9 +125,9 @@ namespace feria_virtual_web
 
                 // Configurar los datos de la solicitud
                 var requestData = new List<KeyValuePair<string, string>>
-        {
-            new KeyValuePair<string, string>("grant_type", "client_credentials")
-        };
+                {
+                    new KeyValuePair<string, string>("grant_type", "client_credentials")
+                };
 
                 // Configurar las cabeceras de la solicitud
                 client.DefaultRequestHeaders.Add("Authorization", $"Basic {credentials}");
@@ -145,7 +150,6 @@ namespace feria_virtual_web
                 }
             }
         }
-
 
 
 

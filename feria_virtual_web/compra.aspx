@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="compra.aspx.cs" Inherits="feria_virtual_web.compra" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="compra.aspx.cs" Inherits="feria_virtual_web.compra" EnableEventValidation="false" Async="true" %>
 
 <!DOCTYPE html>
 
@@ -22,14 +22,14 @@
             </div>
 
             <div>
-                <asp:GridView runat="server" ID="gvDetallesPV" AutoGenerateColumns="false">
-                    <Columns>
-                        <asp:BoundField DataField="ID_DETALLE_PV" HeaderText="ID Detalle PV" />
-                        <asp:BoundField DataField="ID_PRODUCTO" HeaderText="ID Producto" />
-                        <asp:BoundField DataField="CANTIDAD" HeaderText="Cantidad" />
-                        <asp:BoundField DataField="PRECIO_UNITARIO" HeaderText="Precio Unitario" />
-                        <asp:ButtonField ButtonType="Button" Text="Pagar" CommandName="Pagar" />
-                    </Columns>
+                <asp:GridView runat="server" ID="gvDetallesPV" AutoGenerateColumns="false" OnRowCommand="gvDetallesPV_RowCommand" DataKeyNames="ID_DETALLE_PV">
+                 <Columns>
+                      <asp:BoundField DataField="ID_DETALLE_PV" HeaderText="ID Detalle PV" />
+                      <asp:BoundField DataField="ID_PRODUCTO" HeaderText="ID Producto" />
+                      <asp:BoundField DataField="CANTIDAD" HeaderText="Cantidad" />
+                      <asp:BoundField DataField="PRECIO_UNITARIO" HeaderText="Precio Unitario" />
+                      <asp:ButtonField ButtonType="Button" Text="Pagar" CommandName="Pagar" />
+                  </Columns>
                 </asp:GridView>
             </div>
         </div>
