@@ -10,8 +10,39 @@
 </head>
 
 <body>
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #46b5d1"> <!-- Agrega la clase de fondo -->
+              <div class="container-fluid">
+                  <!-- Navbar Brand with Image -->
+                  <a class="navbar-brand" href="/">
+                      <img src="images/logo_transparent.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
+                  </a>
+    
+                    <!-- Navbar Toggler Button for Responsive Design -->
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+    
+                    <!-- Navbar Links -->
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav">
+                            <!-- Opción de Productos -->
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="/Transportista.aspx">Envíos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="ListaPedidos.aspx">Historial</a>
+                            </li>
+                        </ul>
+                    </div>
+                   <ul class="navbar-nav justify-content-end">
+                                              <li class="nav-item">
+                                                  <a class="nav-link text-white" href="/">Cerrar sesión</a>
+                                              </li>
+                                          </ul>
+                </div>
+            </nav>
 <div class="container">
-    <h1 class="mt-4">Envíos pendientes</h1>
+    <h3 class="mt-4">Envíos pendientes</h3>
     <form id="form1" runat="server">
         <div>
         </div>
