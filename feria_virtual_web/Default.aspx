@@ -52,6 +52,7 @@
                                     ID="TextPassword"
                                     runat="server">
                                 </asp:TextBox>
+                                <asp:CheckBox ID="chkPersistente" runat="server" Text="Recordarme" />
                                 <div class="text-center">
                                     <asp:Button ID="btnlogin"
                                                 runat="server"
@@ -60,6 +61,7 @@
                                                 ButtonType="Submit"
                                                 CssClass="btn btn-lg btn-primary btn-login text-uppercase fw-bold mb-2" />
                                 </div>
+                                <asp:Label ID="lblMensaje" runat="server" Text=""></asp:Label>
                             </div>
                         </div>
                     </div>
