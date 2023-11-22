@@ -52,7 +52,12 @@
                                     ID="TextPassword"
                                     runat="server">
                                 </asp:TextBox>
-                                <asp:CheckBox ID="chkPersistente" runat="server" Text="Recordarme" />
+                                <div class="form-check">
+                                      <label class="form-check-label" for="chkPersistente">
+                                        <asp:CheckBox ID="chkPersistente" runat="server" Checked="False"/> Recordarme
+                                    </label>
+                                    </div>
+                                
                                 <div class="text-center">
                                     <asp:Button ID="btnlogin"
                                                 runat="server"
