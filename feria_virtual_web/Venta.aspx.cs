@@ -98,25 +98,27 @@ namespace feria_virtual_web
             }
         }
 
+        protected void gvDetallesPV_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            // Lógica del evento
+        }
+
         private void BindGrid()
         {
             string connectionString = "Data Source=localhost:1521/xe;User Id=maipogrande;Password=123;";
             using (OracleConnection con = new OracleConnection(connectionString))
             {
-                // Utiliza un JOIN para obtener datos de DETALLE_PV y cabecera_pv
-                OracleCommand cmd = new OracleCommand("SELECT dp.ID_DETALLE_PV, dp.ID_PRODUCTO, dp.CANTIDAD, dp.PRECIO_UNITARIO, dp.ID_CABECERA_PV " +
-                                                     "FROM DETALLE_PV dp " +
-                                                     "JOIN cabecera_pv cp ON dp.ID_CABECERA_PV = cp.ID_CABECERA_PV", con);
+                OracleCommand cmd = new OracleCommand("SELECT * FROM PRODUCTO", con);
                 con.Open();
                 OracleDataAdapter sda = new OracleDataAdapter(cmd);
                 DataTable dt = new DataTable();
                 sda.Fill(dt);
-                dgDetallesPV.DataSource = dt;
-                dgDetallesPV.DataBind();
+                gvDetallesPV.DataSource = dt;
+                gvDetallesPV.DataBind();
             }
         }
 
-        protected void dgDetallesPV_SelectedIndexChanged(object sender, EventArgs e)
+        protected void gvDetallesPV_SelectedIndexChanged(object sender, EventArgs e)
         {
             BindGrid();
         }
@@ -157,20 +159,8 @@ namespace feria_virtual_web
                 Response.Write("Error al agregar el pedido: " + ex.Message);
             }
         }
-        protected void dgDetallesPV_ItemCommand(object source, DataGridCommandEventArgs e)
-        {
-            if (e.CommandName == "PagarDetalle")
-            {
-                // Mensaje de depuración
-                System.Diagnostics.Debug.WriteLine("Botón Pagar presionado en la fila " + e.Item.ItemIndex);
 
-                // URL de la página externa a la que deseas redireccionar
-                string urlExterna = "https://www.sandbox.paypal.com/checkoutnow?token=537040496W707163N";
 
-                // Redireccionar a la página externa
-                Response.Redirect(urlExterna);
-            }
-        }
 
         // Método ficticio para obtener el token desde la base de datos
         private string ObtenerTokenDesdeLaBaseDeDatos(string idProducto)
