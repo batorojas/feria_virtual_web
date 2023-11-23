@@ -60,6 +60,15 @@ namespace feria_virtual_web
         protected global::System.Web.UI.WebControls.TextBox NOMBRE_PRODUCTO;
 
         /// <summary>
+        /// ValidarNombreProducto control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator ValidarNombreProducto;
+
+        /// <summary>
         /// Label3 control.
         /// </summary>
         /// <remarks>
@@ -76,6 +85,24 @@ namespace feria_virtual_web
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox PRECIO;
+
+        /// <summary>
+        /// ValidarPrecioNumerico control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator ValidarPrecioNumerico;
+
+        /// <summary>
+        /// ValidarPrecio control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator ValidarPrecio;
 
         /// <summary>
         /// Label4 control.
@@ -112,6 +139,24 @@ namespace feria_virtual_web
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox PORCENTAJE_MERMA;
+
+        /// <summary>
+        /// ValidarDecimalPorcentajeMerma control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator ValidarDecimalPorcentajeMerma;
+
+        /// <summary>
+        /// ValidarPorcentajeMerma control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator ValidarPorcentajeMerma;
 
         /// <summary>
         /// agregar_producto control.

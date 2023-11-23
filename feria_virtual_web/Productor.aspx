@@ -1,14 +1,15 @@
-﻿  <%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Productor.aspx.cs" Inherits="feria_virtual_web.Productor" %>
+﻿ <%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Productor.aspx.cs" Inherits="feria_virtual_web.Productor" %>
 
 <!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html">
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Administración de productos - Maipo Grande</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"> <!-- Enlace a Bootstrap CDN -->
 </head>
+
 <body>
 <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #46b5d1"> <!-- Agrega la clase de fondo -->
               <div class="container-fluid">
@@ -45,12 +46,22 @@
         <div class="row">
             <div class="col-lg-6">
                 <div class="form-group">
-                    <asp:Label ID="Label1" runat="server" Text="N° de categoría" CssClass="control-label"></asp:Label>
+                    <asp:Label ID="Label1" runat="server" Text="Categoría" CssClass="control-label"></asp:Label>
                     <asp:DropDownList ID="ddlCategoria" runat="server" CssClass="form-control"></asp:DropDownList>
+                    <small id="anadirCategoria" class="form-text text-muted">
+                        <p>Si desea añadir una nueva categoría, haga click <a href="/CategoriaProducto.aspx">aquí</a></p>
+                        </small>
                 </div>
                 <div class="form-group">
                     <asp:Label ID="Label2" runat="server" Text="Nombre de producto" CssClass="control-label"></asp:Label>
                     <asp:TextBox ID="NOMBRE_PRODUCTO" runat="server" CssClass="form-control"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="ValidarNombreProducto" runat="server"
+                                                ControlToValidate="NOMBRE_PRODUCTO"
+                                                ErrorMessage="Ingrese un nombre de producto válido."
+                                                ForeColor="Red"
+                                                Display="Dynamic"
+                                                SetFocusOnError="True">
+                    </asp:RequiredFieldValidator>
                 </div>
                 <div class="form-group">
                     <asp:Label ID="Label3" runat="server" Text="Precio" CssClass="control-label"></asp:Label>
@@ -58,16 +69,46 @@
                       <span class="input-group-text">$</span>
                     <asp:TextBox ID="PRECIO" runat="server" CssClass="form-control"></asp:TextBox>
                         </div>
+                    <asp:RegularExpressionValidator ID="ValidarPrecioNumerico" runat="server"
+                                                    ControlToValidate="PRECIO"
+                                                    ErrorMessage="Sólo caracteres numéricos."
+                                                    ForeColor="Red"
+                                                    Display="Dynamic"
+                                                    SetFocusOnError="True"
+                                                    ValidationExpression="^[0-9]+$">
+                                            </asp:RegularExpressionValidator>
+                    <asp:RequiredFieldValidator ID="ValidarPrecio" runat="server"
+                                                ControlToValidate="PRECIO"
+                                                ErrorMessage="Ingrese un precio válido. (Sólo números)"
+                                                ForeColor="Red"
+                                                Display="Dynamic"
+                                                SetFocusOnError="True">
+                    </asp:RequiredFieldValidator>
                 </div>
                 <div class="form-group">
                     <asp:Label ID="Label4" runat="server" Text="Calidad" CssClass="control-label"></asp:Label>
                     <asp:DropDownList ID="ddlCalidad" runat="server" CssClass="form-control"></asp:DropDownList>
                 </div>
+                <br/>
                 <div class="form-group">
                     <asp:Label ID="Label5" runat="server" Text="Porcentaje de merma" CssClass="control-label"></asp:Label>
                     <asp:TextBox ID="PORCENTAJE_MERMA" runat="server" CssClass="form-control"></asp:TextBox>
-                    <small id="porcentajeMermaHelp" class="form-text text-muted">Sólo valores decimales.</small>
                 </div>
+                <asp:RequiredFieldValidator ID="ValidarDecimalPorcentajeMerma" runat="server"
+                                            ControlToValidate="PORCENTAJE_MERMA"
+                                            ErrorMessage="Ingrese un porcentaje de merma."
+                                            ForeColor="Red"
+                                            Display="Dynamic"
+                                            SetFocusOnError="True">
+                </asp:RequiredFieldValidator>
+                <asp:RegularExpressionValidator ID="ValidarPorcentajeMerma" runat="server"
+                        ControlToValidate="PORCENTAJE_MERMA"
+                        ErrorMessage="Ingrese un valor decimal válido. Sólo se aceptan números separados por coma."
+                        ForeColor="Red"
+                        ValidationExpression="^\d+(\,\d+)?$"
+                        Display="Dynamic"
+                        SetFocusOnError="true">
+                    </asp:RegularExpressionValidator>
                 <div class="form-group mt-3">
                     <asp:Button ID="agregar_producto" runat="server" Text="Agregar" CssClass="btn btn-primary" OnClick="agregar_producto_Click1" />
                 </div>

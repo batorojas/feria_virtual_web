@@ -186,8 +186,6 @@ namespace feria_virtual_web
             }
             BindGrid();
         }
-
-
         protected void mostrar_SelectedIndexChanged(object sender, EventArgs e)
         {
             BindGrid();
