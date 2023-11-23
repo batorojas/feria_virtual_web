@@ -186,6 +186,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="About.aspx" />
+    <Content Include="CategoriaProducto.aspx" />
     <Content Include="Cliente.aspx" />
     <Content Include="compra.aspx" />
     <Content Include="Contact.aspx" />
@@ -285,6 +286,13 @@
       <DependentUpon>About.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="CategoriaProducto.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>CategoriaProducto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CategoriaProducto.aspx.designer.cs">
+      <DependentUpon>CategoriaProducto.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Cliente.aspx.cs">
       <DependentUpon>Cliente.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
