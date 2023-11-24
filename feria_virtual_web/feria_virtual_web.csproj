@@ -62,6 +62,9 @@
     <Reference Include="Oracle.ManagedDataAccess, Version=4.122.21.1, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
       <HintPath>..\packages\Oracle.ManagedDataAccess.21.12.0\lib\net462\Oracle.ManagedDataAccess.dll</HintPath>
     </Reference>
+    <Reference Include="PayPal, Version=1.9.1.0, Culture=neutral, PublicKeyToken=5b4afc1ccaef40fb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PayPal.1.9.1\lib\net451\PayPal.dll</HintPath>
+    </Reference>
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
     </Reference>
@@ -207,6 +210,8 @@
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Default.aspx" />
+    <Content Include="exito.aspx" />
+    <Content Include="fallo.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Productor.aspx" />
@@ -313,6 +318,20 @@
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
     <Compile Include="DetallePV.cs" />
+    <Compile Include="exito.aspx.cs">
+      <DependentUpon>exito.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="exito.aspx.designer.cs">
+      <DependentUpon>exito.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="fallo.aspx.cs">
+      <DependentUpon>fallo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="fallo.aspx.designer.cs">
+      <DependentUpon>fallo.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
