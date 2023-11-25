@@ -22,54 +22,25 @@ namespace feria_virtual_web
             BindGrid();
         }
 
-        protected void btnGenerarSolicitud_Click(object sender, EventArgs e)
+    
+
+
+
+
+        private bool UsuarioExiste(string rut, OracleConnection con)
         {
-            try
+            // Consultar la base de datos para verificar si el usuario existe
+            string selectQuery = "SELECT COUNT(*) FROM CLIENTE WHERE RUT = :Rut";
+
+            using (OracleCommand cmd = new OracleCommand(selectQuery, con))
             {
-                string connectionString = "Data Source=localhost:1521/xe;User Id=maipogrande;Password=123;";
+                cmd.Parameters.Add(new OracleParameter("Rut", rut));
 
-                using (OracleConnection con = new OracleConnection(connectionString))
-                {
-                    con.Open();
-
-                    // Obtener el RUT del cliente ingresado en el campo txtRutCliente
-                    string rutCliente = txtRutCliente.Text.Trim();
-
-                    // Obtener la observación del campo txtObservacion
-                    string observacion = txtObservacion.Text.Trim();
-
-                    // Consultar la base de datos
-                    string insertQuery = "INSERT INTO CABECERA_PV (\"ID_CABECERA_PV\", \"FECHA_EMISION\",\"OBS_PV\",\"RUT_CLIENTE\",\"ESTADO_PV\",\"EMPRESA_TRANS\", \"ID_TIPO_VENTA\") " +
-                                         "VALUES (CABECERA_PV_SEQ.NEXTVAL, SYSDATE, :Observacion, :RutCliente, 1, 1, 1)";
-
-                    using (OracleCommand cmd = new OracleCommand(insertQuery, con))
-                    {
-                        cmd.Parameters.Add(new OracleParameter("Observacion", observacion));
-                        cmd.Parameters.Add(new OracleParameter("RutCliente", rutCliente));
-
-                        // Ejecutar la inserción
-                        int rowsAffected = cmd.ExecuteNonQuery();
-
-                        if (rowsAffected > 0)
-                        {
-                            // Puedes mostrar un mensaje de éxito o realizar otras acciones si es necesario
-                            Response.Write("Solicitud generada exitosamente.");
-                        }
-                        else
-                        {
-                            Response.Write("Error al generar la solicitud.");
-                        }
-                    }
-
-                    con.Close();
-                }
-            }
-            catch (Exception ex)
-            {
-                // Manejar errores aquí (mostrar un mensaje de error, registrar el error, etc.)
-                Response.Write("Error al generar la solicitud: " + ex.Message);
+                int count = Convert.ToInt32(cmd.ExecuteScalar());
+                return count > 0;
             }
         }
+
 
         // Obtener el IdTipoVenta desde la tabla cliente basado en el RUT
         private int ObtenerIdTipoVenta(string rutCliente, OracleConnection con)
@@ -127,6 +98,70 @@ namespace feria_virtual_web
         {
             try
             {
+                string connectionString = "Data Source=localhost:1521/xe;User Id=maipogrande;Password=123;";
+
+                using (OracleConnection con = new OracleConnection(connectionString))
+                {
+                    con.Open();
+
+                    // Obtener el RUT del cliente ingresado en el campo txtRutCliente
+                    string rutCliente = txtRutCliente.Text.Trim();
+
+                    // Verificar si el usuario existe
+                    if (UsuarioExiste(rutCliente, con))
+                    {
+                        // Obtener la observación del campo txtObservacion
+                        string observacion = txtObservacion.Text.Trim();
+
+                        // Consultar la base de datos
+                        string insertQuery = "INSERT INTO CABECERA_PV (\"ID_CABECERA_PV\", \"FECHA_EMISION\",\"OBS_PV\",\"RUT_CLIENTE\",\"ESTADO_PV\",\"EMPRESA_TRANS\", \"ID_TIPO_VENTA\") " +
+                                             "VALUES (CABECERA_PV_SEQ.NEXTVAL, SYSDATE, :Observacion, :RutCliente, 1, 1, 1)";
+
+                        using (OracleCommand cmd = new OracleCommand(insertQuery, con))
+                        {
+                            cmd.Parameters.Add(new OracleParameter("Observacion", observacion));
+                            cmd.Parameters.Add(new OracleParameter("RutCliente", rutCliente));
+
+                            // Ejecutar la inserción
+                            int rowsAffected = cmd.ExecuteNonQuery();
+
+                            if (rowsAffected > 0)
+                            {
+                                // Puedes mostrar un mensaje de éxito o realizar otras acciones si es necesario
+                                Response.Write("Solicitud generada exitosamente.");
+
+                                // Ahora, llamar a la función para agregar el pedido
+                                AgregarPedido(con);
+                            }
+                            else
+                            {
+                                Response.Write("Error al generar la solicitud.");
+                            }
+                        }
+                    }
+                    else
+                    {
+                        Response.Write("El usuario no existe.");
+                    }
+
+                    con.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                // Manejar errores aquí (mostrar un mensaje de error, registrar el error, etc.)
+                Response.Write("Error al generar la solicitud: " + ex.Message);
+            }
+        }
+
+
+
+
+
+        private void AgregarPedido(OracleConnection con)
+        {
+            try
+            {
                 // Obtener valores de TextBox y Label fuera del DataGrid
                 string idProducto = id_producto.Text;
                 string cantidad = cantidadde.Text;
@@ -137,22 +172,16 @@ namespace feria_virtual_web
                                      $"(SELECT p.precio FROM producto p WHERE p.id_producto = :IdProducto), " +
                                      "(SELECT MAX(id_cabecera_pv) FROM CABECERA_PV))";
 
-                using (OracleConnection con = new OracleConnection("Data Source=localhost:1521/xe;User Id=maipogrande;Password=123;"))
+                using (OracleCommand cmd = new OracleCommand(insertQuery, con))
                 {
-                    con.Open();
+                    cmd.Parameters.Add(new OracleParameter("IdProducto", idProducto));
+                    cmd.Parameters.Add(new OracleParameter("Cantidad", cantidad));
 
-                    using (OracleCommand cmd = new OracleCommand(insertQuery, con))
-                    {
-                        cmd.Parameters.Add(new OracleParameter("IdProducto", idProducto));
-                        cmd.Parameters.Add(new OracleParameter("Cantidad", cantidad));
-
-                        // Ejecutar la consulta INSERT
-                        cmd.ExecuteNonQuery();
-                    }
-
-                    Response.Write("Pedido agregado exitosamente.");
-                    con.Close();
+                    // Ejecutar la consulta INSERT
+                    cmd.ExecuteNonQuery();
                 }
+
+                Response.Write("Pedido agregado exitosamente.");
             }
             catch (Exception ex)
             {
@@ -161,24 +190,23 @@ namespace feria_virtual_web
         }
 
 
-
-        // Método ficticio para obtener el token desde la base de datos
-        private string ObtenerTokenDesdeLaBaseDeDatos(string idProducto)
+        protected void btnDefault_Click(object sender, EventArgs e)
         {
-            // Aquí implementa la lógica para obtener el token asociado al producto desde tu base de datos
-            // Puedes consultar la base de datos y devolver el token correspondiente
-            // En este ejemplo, simplemente devolveré un token de ejemplo
-            return "537040496W707163N";
+            Response.Redirect("Default.aspx");
         }
 
-        protected void btnPaypal_Click(object sender, EventArgs e)
+        protected void btnCompra_Click(object sender, EventArgs e)
         {
-            // URL a la que deseas redireccionar
-            string urlExterna = "https://www.sandbox.paypal.com/checkoutnow?token=34C92048HK7174418";
-
-            // Redireccionar a la página externa
-            Response.Redirect(urlExterna);
+            Response.Redirect("compra.aspx");
         }
-    }
+
+        protected void btnPagosRealizados_Click(object sender, EventArgs e)
+        {
+            // Redirigir a la página Cliente.aspx
+            Response.Redirect("Cliente.aspx");
+        }
+
 
     }
+
+}

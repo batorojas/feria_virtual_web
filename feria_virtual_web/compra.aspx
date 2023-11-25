@@ -10,7 +10,15 @@
 <body>
     <form id="form1" runat="server">
         <div>
-            <h1>Consulta de Detalles PV</h1>
+            
+
+
+            <%-- estos son los botones para napbar --%>
+            <asp:Button ID="btnDefault" runat="server" Text="salir" OnClick="btnDefault_Click" /> 
+            <asp:Button ID="btnVenta" runat="server" Text="ir a pedidos" OnClick="btnVenta_Click" />
+            <asp:Button ID="btnPagosRealizados" runat="server" Text="Pagos Realizados" OnClick="btnPagosRealizados_Click" />
+             <%-- estos son los botones para napbar --%>
+            <h1>Realizar pagos</h1>
 
             <div>
                 <label for="txtRut">RUT:</label>
@@ -18,7 +26,7 @@
             </div>
 
             <div>
-                <asp:Button runat="server" ID="btnConsultar" Text="Consultar Detalles PV" OnClick="btnConsultar_Click" />
+                <asp:Button runat="server" ID="btnConsultar" Text="consultar pedidos" OnClick="btnConsultar_Click" />
             </div>
 
             <div>

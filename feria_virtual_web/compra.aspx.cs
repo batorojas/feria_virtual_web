@@ -11,6 +11,8 @@ using Newtonsoft.Json;
 using Oracle.ManagedDataAccess.Client;
 using PayPal;
 using PayPal.Api;
+using Telegram.Bot;
+
 namespace feria_virtual_web
 {
     public partial class compra : System.Web.UI.Page
@@ -46,9 +48,9 @@ namespace feria_virtual_web
             try
             {
                 var apiContext = new APIContext(new OAuthTokenCredential(
-                  "AeSjmd1cOUZF164S1qM0n7Ul_ZAnX9K_oHyZd6fW_NLaWZvKX4vdWOIR5TVDvgEk4UJWvG62sj8JCFgt",
-                  "EC913X7vIu-2icepQF_Lg9nn64GI9IRVchzW2s0gT8XnosB8mQOaPnukHfmmuWDNoB3VL4Mr1xDDiUTu"
-              ).GetAccessToken()); 
+                    "AeSjmd1cOUZF164S1qM0n7Ul_ZAnX9K_oHyZd6fW_NLaWZvKX4vdWOIR5TVDvgEk4UJWvG62sj8JCFgt",
+                    "EC913X7vIu-2icepQF_Lg9nn64GI9IRVchzW2s0gT8XnosB8mQOaPnukHfmmuWDNoB3VL4Mr1xDDiUTu"
+                ).GetAccessToken());
                 string rut = txtRut.Text.Trim();
 
                 string connectionString = "Data Source=localhost:1521/xe;User Id=maipogrande;Password=123;";
@@ -57,10 +59,11 @@ namespace feria_virtual_web
                 {
                     con.Open();
 
-                    string selectQuery = "SELECT DP.ID_DETALLE_PV, DP.ID_PRODUCTO, DP.CANTIDAD, DP.PRECIO_UNITARIO " +
-                                         "FROM DETALLE_PV DP " +
-                                         "INNER JOIN CABECERA_PV CP ON DP.ID_CABECERA_PV = CP.ID_CABECERA_PV " +
-                                         "WHERE CP.RUT_CLIENTE = :Rut";
+                    string selectQuery = @"SELECT DP.ID_DETALLE_PV, DP.ID_PRODUCTO, DP.CANTIDAD, DP.PRECIO_UNITARIO
+                                    FROM DETALLE_PV DP
+                                    INNER JOIN CABECERA_PV CP ON DP.ID_CABECERA_PV = CP.ID_CABECERA_PV
+                                    WHERE CP.ESTADO_PV = 1
+                                    AND CP.RUT_CLIENTE = :Rut";
 
                     using (OracleCommand cmd = new OracleCommand(selectQuery, con))
                     {
@@ -118,9 +121,9 @@ namespace feria_virtual_web
                         amount = new Amount
                         {
                             currency = "USD",
-                            total = montoFormateado  // Use the formatted total
+                            total = montoFormateado
                         },
-                        description = idProducto
+                        description = GetProductNameById(idProducto)
                     }
                 },
                         redirect_urls = new RedirectUrls
@@ -133,6 +136,23 @@ namespace feria_virtual_web
                     var createdPayment = payment.Create(apiContext);
 
                     var approvalUrl = createdPayment.GetApprovalUrl();
+
+                    // Verificar telegram bot
+                    if (Request.Url.ToString().StartsWith($"{Request.Url.Scheme}://{Request.Url.Authority}/exito.aspx?success=true"))
+                    {
+                        /*// Crear el cliente de Telegram.Bot con tu token de bot
+                        var botClient = new TelegramBotClient("TU_TOKEN_DE_BOT_AQUI");
+
+                        // Mensaje que deseas enviar
+                        string mensaje = $"¡Pago exitoso! Producto: {GetProductNameById(idProducto)}, Monto: {montoFormateado}";
+
+                        // ID de chat al que deseas enviar el mensaje (puede ser un grupo o un chat privado)
+                        long chatId = TU_CHAT_ID_AQUI;
+
+                        // Enviar el mensaje a través de la API de Telegram
+                        botClient.SendTextMessageAsync(chatId, mensaje);  */
+                    }
+
                     Response.Redirect(approvalUrl);
                 }
             }
@@ -147,6 +167,53 @@ namespace feria_virtual_web
                 Response.Write($"Detalles de la excepción: {ex.ToString()}");
             }
         }
+        private string GetProductNameById(string idProducto)
+        {
+            string connectionString = "Data Source=localhost:1521/xe;User Id=maipogrande;Password=123;";
+            string nombreProducto = string.Empty;
+
+            using (OracleConnection con = new OracleConnection(connectionString))
+            {
+                con.Open();
+
+                string selectProductNameQuery = "SELECT NOMBRE_PRODUCTO FROM PRODUCTO WHERE ID_PRODUCTO = :IdProducto";
+
+                using (OracleCommand cmd = new OracleCommand(selectProductNameQuery, con))
+                {
+                    cmd.Parameters.Add(new OracleParameter("IdProducto", idProducto));
+                    object result = cmd.ExecuteScalar();
+
+                    if (result != null)
+                    {
+                        nombreProducto = result.ToString();
+                    }
+                }
+
+                con.Close();
+            }
+
+            return nombreProducto;
+        }
+
+
+        protected void btnDefault_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Default.aspx");
+        }
+
+        
+
+        protected void btnVenta_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("venta.aspx");
+        }
+
+        protected void btnPagosRealizados_Click(object sender, EventArgs e)
+        {
+            // Redirigir a la página Cliente.aspx
+            Response.Redirect("Cliente.aspx");
+        }
+
 
 
     }
