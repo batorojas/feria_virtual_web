@@ -11,6 +11,8 @@ using Newtonsoft.Json;
 using Oracle.ManagedDataAccess.Client;
 using PayPal;
 using PayPal.Api;
+using Telegram.Bot;
+
 namespace feria_virtual_web
 {
     public partial class compra : System.Web.UI.Page
@@ -119,9 +121,9 @@ namespace feria_virtual_web
                         amount = new Amount
                         {
                             currency = "USD",
-                            total = montoFormateado  // Use the formatted total
+                            total = montoFormateado
                         },
-                        description = GetProductNameById(idProducto)  // Obtener el nombre del producto
+                        description = GetProductNameById(idProducto)
                     }
                 },
                         redirect_urls = new RedirectUrls
@@ -134,6 +136,23 @@ namespace feria_virtual_web
                     var createdPayment = payment.Create(apiContext);
 
                     var approvalUrl = createdPayment.GetApprovalUrl();
+
+                    // Verificar telegram bot
+                    if (Request.Url.ToString().StartsWith($"{Request.Url.Scheme}://{Request.Url.Authority}/exito.aspx?success=true"))
+                    {
+                        /*// Crear el cliente de Telegram.Bot con tu token de bot
+                        var botClient = new TelegramBotClient("TU_TOKEN_DE_BOT_AQUI");
+
+                        // Mensaje que deseas enviar
+                        string mensaje = $"¡Pago exitoso! Producto: {GetProductNameById(idProducto)}, Monto: {montoFormateado}";
+
+                        // ID de chat al que deseas enviar el mensaje (puede ser un grupo o un chat privado)
+                        long chatId = TU_CHAT_ID_AQUI;
+
+                        // Enviar el mensaje a través de la API de Telegram
+                        botClient.SendTextMessageAsync(chatId, mensaje);  */
+                    }
+
                     Response.Redirect(approvalUrl);
                 }
             }

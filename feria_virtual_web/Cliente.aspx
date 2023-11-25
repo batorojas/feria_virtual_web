@@ -12,9 +12,11 @@
         <div>
 
             <div>
+                 <%-- estos son los botones para napbar --%>
             <asp:Button ID="btnDefault" runat="server" Text="salir" OnClick="btnDefault_Click" />
             <asp:Button ID="btnCompra" runat="server" Text="seleccion de pedidos" OnClick="btnCompra_Click" />
             <asp:Button ID="btnVenta" runat="server" Text="ir a pedidos" OnClick="btnVenta_Click" />
+                 <%-- estos son los botones para napbar --%>
             </div>
             <h1>Compras terminadas</h1>     
             <asp:TextBox ID="txtRut" runat="server" placeholder="Ingrese su RUT" />

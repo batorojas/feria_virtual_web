@@ -13,10 +13,11 @@
             
 
 
-            
+            <%-- estos son los botones para napbar --%>
             <asp:Button ID="btnDefault" runat="server" Text="salir" OnClick="btnDefault_Click" /> 
             <asp:Button ID="btnVenta" runat="server" Text="ir a pedidos" OnClick="btnVenta_Click" />
             <asp:Button ID="btnPagosRealizados" runat="server" Text="Pagos Realizados" OnClick="btnPagosRealizados_Click" />
+             <%-- estos son los botones para napbar --%>
             <h1>Realizar pagos</h1>
 
             <div>
