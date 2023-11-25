@@ -13,5 +13,22 @@ namespace feria_virtual_web
         {
 
         }
+
+        protected void btnDefault_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Default.aspx");
+        }
+
+        protected void btnCompra_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("compra.aspx");
+        }
+
+        protected void btnVenta_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("venta.aspx");
+        }
+
+
     }
 }

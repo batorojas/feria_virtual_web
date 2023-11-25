@@ -179,6 +179,20 @@ namespace feria_virtual_web
             // Redireccionar a la página externa
             Response.Redirect(urlExterna);
         }
-    }
+
+
+        protected void btnDefault_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Default.aspx");
+        }
+
+        protected void btnCompra_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("compra.aspx");
+        }
+
+
 
     }
+
+}

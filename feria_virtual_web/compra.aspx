@@ -12,6 +12,13 @@
         <div>
             <h1>Consulta de Detalles PV</h1>
 
+
+            
+            <asp:Button ID="btnDefault" runat="server" Text="salir" OnClick="btnDefault_Click" /> 
+            <asp:Button ID="btnVenta" runat="server" Text="ir a pagos" OnClick="btnVenta_Click" />
+
+
+
             <div>
                 <label for="txtRut">RUT:</label>
                 <asp:TextBox runat="server" ID="txtRut"></asp:TextBox>
