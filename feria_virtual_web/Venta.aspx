@@ -9,8 +9,15 @@
 </head>
 <body>
     <form id="form1" runat="server">
+
+
         <div>
             <h1>Generar Solicitud</h1>
+
+            <asp:Button ID="btnDefault" runat="server" Text="salir" OnClick="btnDefault_Click" />
+            <asp:Button ID="btnCompra" runat="server" Text="seleccion de pedidos" OnClick="btnCompra_Click" />
+            
+
 
             <div>
                 <label for="txtObservacion">Observación PV:</label>
@@ -51,8 +58,7 @@
                     <asp:Button runat="server" ID="btnAgregarPedido" Text="Agregar Pedido" OnClick="btnAgregarPedido_Click" />
                     <h1></h1>
                     <div>
-                        <label for="paypal">prueba de paipal</label>
-                        <asp:Button runat="server" ID="Button1" Text="prueba de paypal" OnClick="btnPaypal_Click" />
+                    
                     </div>
 
                 </div>

@@ -10,6 +10,13 @@
 <body>
     <form id="form1" runat="server">
         <div>
+
+
+            <asp:Button ID="btnDefault" runat="server" Text="salir" OnClick="btnDefault_Click" />
+            <asp:Button ID="btnCompra" runat="server" Text="seleccion de pedidos" OnClick="btnCompra_Click" />
+            <asp:Button ID="btnVenta" runat="server" Text="ir a pagos" OnClick="btnVenta_Click" />
+
+
         </div>
     </form>
 </body>
