@@ -189,6 +189,12 @@ namespace feria_virtual_web
             Response.Redirect("venta.aspx");
         }
 
+        protected void btnPagosRealizados_Click(object sender, EventArgs e)
+        {
+            // Redirigir a la página Cliente.aspx
+            Response.Redirect("Cliente.aspx");
+        }
+
 
 
     }
