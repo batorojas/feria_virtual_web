@@ -20,6 +20,7 @@ namespace feria_virtual_web
         protected void Page_Load(object sender, EventArgs e)
         {
             BindGrid();
+            ListarProductos();
         }
 
     
@@ -128,20 +129,23 @@ namespace feria_virtual_web
                             if (rowsAffected > 0)
                             {
                                 // Puedes mostrar un mensaje de éxito o realizar otras acciones si es necesario
-                                Response.Write("Solicitud generada exitosamente.");
+                                string script = "alert('El pedido se ha ingresado de manera exitosa');";
+                                ClientScript.RegisterStartupScript(this.GetType(), "PedidoIngresado", script, true);
 
                                 // Ahora, llamar a la función para agregar el pedido
                                 AgregarPedido(con);
                             }
                             else
                             {
-                                Response.Write("Error al generar la solicitud.");
+                                string script = "alert('El pedido no se ha ingresado correctamente, inténtelo más tarde.');";
+                                ClientScript.RegisterStartupScript(this.GetType(), "PedidoNoIngresado", script, true);
                             }
                         }
                     }
                     else
                     {
-                        Response.Write("El usuario no existe.");
+                        string script = "alert('El usuario no existe, revise si el RUT registrado es correcto o comuníquese con el administrador.');";
+                        ClientScript.RegisterStartupScript(this.GetType(), "UsuarioNoExiste", script, true);
                     }
 
                     con.Close();
@@ -155,17 +159,44 @@ namespace feria_virtual_web
         }
 
 
+        private void ListarProductos()
+        {
+            string connectionString = "Data Source=localhost:1521/xe;User Id=maipogrande;Password=123;";
+            string query = "SELECT * FROM PRODUCTO";
+            using (OracleConnection connection = new OracleConnection(connectionString))
+            {
+                using (OracleCommand command = new OracleCommand(query, connection))
+                {
+                    connection.Open();
+
+                    using (OracleDataReader reader = command.ExecuteReader())
+                    {
+                        // Limpiar DropDownList antes de agregar nuevas categorías
+                        ddlProducto.Items.Clear();
+
+                        // Agregar cada categoría al DropDownList
+                        while (reader.Read())
+                        {
+                            // Obtener el valor y texto de la columna NOMBRE_PRODUCTO
+                            string valorProducto = reader["NOMBRE_PRODUCTO"].ToString();
+                    
+                            // Agregar el ListItem al DropDownList con el valor y texto
+                            ddlProducto.Items.Add(new ListItem(valorProducto, valorProducto));
+                        }
+                    }
+                }
+            }
+        }
 
 
 
-        private void AgregarPedido(OracleConnection con)
+        private async Task AgregarPedido(OracleConnection con)
         {
             try
             {
                 // Obtener valores de TextBox y Label fuera del DataGrid
-                string idProducto = id_producto.Text;
+                int indiceSeleccionado = ddlProducto.SelectedIndex + 1;
                 string cantidad = cantidadde.Text;
-
                 // Insertar en la base de datos (código de inserción depende de tu estructura de tablas)
                 string insertQuery = "INSERT INTO DETALLE_PV (ID_DETALLE_PV, ID_PRODUCTO, CANTIDAD, PRECIO_UNITARIO, ID_CABECERA_PV) " +
                                      $"VALUES (DETALLE_PV_SEQ.NEXTVAL, :IdProducto, :Cantidad, " +
@@ -174,39 +205,34 @@ namespace feria_virtual_web
 
                 using (OracleCommand cmd = new OracleCommand(insertQuery, con))
                 {
-                    cmd.Parameters.Add(new OracleParameter("IdProducto", idProducto));
+                    cmd.Parameters.Add(new OracleParameter("IdProducto", indiceSeleccionado));
                     cmd.Parameters.Add(new OracleParameter("Cantidad", cantidad));
-
                     // Ejecutar la consulta INSERT
                     cmd.ExecuteNonQuery();
+                    await EnviarMensajeTelegram();
                 }
-
-                Response.Write("Pedido agregado exitosamente.");
             }
             catch (Exception ex)
             {
                 Response.Write("Error al agregar el pedido: " + ex.Message);
             }
         }
-
-
-        protected void btnDefault_Click(object sender, EventArgs e)
+        
+        private async Task EnviarMensajeTelegram()
         {
-            Response.Redirect("Default.aspx");
+            try
+            {
+                string botToken = "6762818327:AAHOiQlDwmDucqKgRacNDUBY7VRlHVNkYkA"; // Reemplaza con el token de tu bot
+                long chatId = 902743181; // Reemplaza con el ID del chat al que deseas enviar el mensaje
+                var botClient = new TelegramBotClient(botToken);
+                string mensaje = "¡Gracias por elegirnos! Su pedido ha sido ingresado y está siendo procesado, le notificaremos los detalles a la brevedad.";
+                await botClient.SendTextMessageAsync(chatId, mensaje);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Ocurrió una excepción al enviar el mensaje de Telegram: {ex.Message}");
+                // Puedes manejar el error de envío de mensaje de Telegram aquí
+            }
         }
-
-        protected void btnCompra_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("compra.aspx");
-        }
-
-        protected void btnPagosRealizados_Click(object sender, EventArgs e)
-        {
-            // Redirigir a la página Cliente.aspx
-            Response.Redirect("Cliente.aspx");
-        }
-
-
     }
-
 }

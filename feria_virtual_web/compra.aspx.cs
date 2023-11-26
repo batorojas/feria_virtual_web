@@ -59,10 +59,11 @@ namespace feria_virtual_web
                 {
                     con.Open();
 
-                    string selectQuery = @"SELECT DP.ID_DETALLE_PV, DP.ID_PRODUCTO, DP.CANTIDAD, DP.PRECIO_UNITARIO
-                                    FROM DETALLE_PV DP
-                                    INNER JOIN CABECERA_PV CP ON DP.ID_CABECERA_PV = CP.ID_CABECERA_PV
-                                    WHERE CP.ESTADO_PV = 1
+                    string selectQuery = @"SELECT DP.ID_DETALLE_PV, DP.ID_PRODUCTO, P.NOMBRE_PRODUCTO, DP.CANTIDAD, DP.PRECIO_UNITARIO, DP.CANTIDAD * DP.PRECIO_UNITARIO AS TOTAL
+FROM DETALLE_PV DP
+         INNER JOIN CABECERA_PV CP ON DP.ID_CABECERA_PV = CP.ID_CABECERA_PV
+JOIN PRODUCTO P ON DP.ID_PRODUCTO = P.ID_PRODUCTO
+WHERE CP.ESTADO_PV = 1
                                     AND CP.RUT_CLIENTE = :Rut";
 
                     using (OracleCommand cmd = new OracleCommand(selectQuery, con))
@@ -103,8 +104,10 @@ namespace feria_virtual_web
 
                     string idDetallePV = row.Cells[0].Text;
                     string idProducto = row.Cells[1].Text;
-                    string cantidad = row.Cells[2].Text;
-                    string precioUnitario = row.Cells[3].Text;
+                    string nombreProducto = row.Cells[2].Text;
+                    string cantidad = row.Cells[3].Text;
+                    string precioUnitario = row.Cells[4].Text;
+                    string totalPago = row.Cells[5].Text;
 
                     decimal total = Convert.ToDecimal(cantidad, CultureInfo.InvariantCulture) * Convert.ToDecimal(precioUnitario, CultureInfo.InvariantCulture);
 
@@ -194,27 +197,5 @@ namespace feria_virtual_web
 
             return nombreProducto;
         }
-
-
-        protected void btnDefault_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("Default.aspx");
-        }
-
-        
-
-        protected void btnVenta_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("venta.aspx");
-        }
-
-        protected void btnPagosRealizados_Click(object sender, EventArgs e)
-        {
-            // Redirigir a la página Cliente.aspx
-            Response.Redirect("Cliente.aspx");
-        }
-
-
-
     }
 }

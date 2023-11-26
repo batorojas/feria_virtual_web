@@ -84,10 +84,7 @@ namespace feria_virtual_web
             {
                 con.Open();
 
-                string selectQuery = "SELECT DP.ID_DETALLE_PV, DP.ID_PRODUCTO, DP.CANTIDAD, DP.PRECIO_UNITARIO " +
-                                     "FROM DETALLE_PV DP " +
-                                     "INNER JOIN CABECERA_PV CP ON DP.ID_CABECERA_PV = CP.ID_CABECERA_PV " +
-                                     "WHERE CP.ESTADO_PV = 2 " +
+                string selectQuery = "SELECT DP.ID_DETALLE_PV, DP.ID_PRODUCTO, P.NOMBRE_PRODUCTO, DP.CANTIDAD, DP.PRECIO_UNITARIO, DP.CANTIDAD * DP.PRECIO_UNITARIO AS TOTAL \n                                     FROM DETALLE_PV DP \n                                     INNER JOIN CABECERA_PV CP ON DP.ID_CABECERA_PV = CP.ID_CABECERA_PV\n                                     JOIN PRODUCTO P ON DP.ID_PRODUCTO = P.ID_PRODUCTO\n                                     WHERE CP.ESTADO_PV = 2 " +
                                      "AND CP.RUT_CLIENTE = :Rut";
 
                 using (OracleCommand cmd = new OracleCommand(selectQuery, con))
@@ -103,22 +100,5 @@ namespace feria_virtual_web
                 }
             }
         }
-
-        protected void btnDefault_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("Default.aspx");
-        }
-
-        protected void btnCompra_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("compra.aspx");
-        }
-
-        protected void btnVenta_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("venta.aspx");
-        }
-
-
     }
 }
