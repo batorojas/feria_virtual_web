@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Venta.aspx.cs" Inherits="feria_virtual_web.Venta"  EnableEventValidation="false"%>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="TuPagina.aspx.cs" Inherits="feria_virtual_web.Venta" Async="true" %>
 
 <!DOCTYPE html>
 
@@ -101,7 +101,7 @@
                
                 <div class="form-group mt-3">
                     <div id="liveAlertPlaceholder"></div>
-                    <asp:Button runat="server" ID="btnAgregarPedido" Text="Pedir" OnClick="btnAgregarPedido_Click" CssClass="btn btn-primary"/>
+                   <asp:Button runat="server" ID="btnAgregarPedido" Text="Pedir" OnClick="btnAgregarPedido_Click" CssClass="btn btn-primary" />
                                     <asp:ValidationSummary ID="vsCantidadDe" runat="server" 
                                                            HeaderText="Corrija los siguientes errores:" 
                                                            DisplayMode="BulletList"
